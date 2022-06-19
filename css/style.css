@@ -1,0 +1,86 @@
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+html {
+    scroll-padding-top: 3.5rem;
+}
+
+header {
+    padding-top: 9.5rem;
+    padding-bottom: 6rem;
+}
+
+section {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+}
+
+.topBar-landing-page,
+.header-landing-page {
+    background-color: #B09B71;
+}
+
+.error:before {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: 1px 0 #4e73df;
+    top: 0;
+    color: #5a5c69;
+    background: #f8f9fc;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+footer.sticky-footer {
+    padding: 2rem 0;
+    flex-shrink: 0;
+}
+
+footer.sticky-footer .copyright {
+    line-height: 1;
+    font-size: 0.8rem;
+}
+
+body.sidebar-toggled footer.sticky-footer {
+    width: 100%;
+}
+
+.bg-login-image-admin {
+    background: url("../asset/vector_admin.svg");
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-register-image-admin {
+    background: url("../asset/vector_register_admin.svg");
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-password-image {
+    background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+    background-position: center;
+    background-size: cover;
+}
+
+.feature {
+    display: inline-flex;
+    background-color: #B09B71;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    width: 3rem;
+    font-size: 1.5rem;
+}
+
+.bg-featured-blog {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 15rem;
+}
