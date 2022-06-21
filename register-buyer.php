@@ -24,14 +24,14 @@
 
 <?php
 //kode php disini
-require 'auth-action-buyer.php';
+require 'auth.php';
 
 if (isset($_POST["submit"])) {
 
-    if (register($_POST) > 0) {
+    if (register_buyer($_POST) > 0) {
         echo "<script>
 		alert('Data berhasil disimpan');
-		document.location.href = 'login.php';
+		document.location.href = 'login-buyer.php';
 		</script>";
     } else {
         echo mysqli_error($conn);

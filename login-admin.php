@@ -13,7 +13,7 @@ if (isset($_SESSION["login"])) {
 ?>
 
 <?php
-require 'auth-action-admin.php';
+require 'auth.php';
 
 if (isset($_POST["login"])) {
     login_check($_POST);

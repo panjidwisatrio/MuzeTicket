@@ -41,9 +41,12 @@
         <div class="container px-4 text-center">
             <h1 class="fw-bolder">Selamat Datang di MuzeTicket</h1>
             <p class="lead">Pemesanan Tiket Museum Jauh Lebih Mudah</p>
-            <a class="btn btn-lg btn-light" href="register-buyer.php">Register</a>
-            <a class="btn btn-lg btn-light" href="login-buyer.php">Login</a>
-            <p class="h6 mt-4 pb-0 mb-0">Kamu pengelola museum?&ensp;<a class="btn btn-warning btn-sm" href="register-admin.php">Daftar disini!</a></p>
+            <form action="" method="$_POST">
+                <a class="btn btn-lg btn-light" type="submit" href="register-buyer.php" value="2" name="auth">Register</a>
+                <a class="btn btn-lg btn-light" type="submit" href="login-buyer.php" value="2" name="auth">Login</a>
+                <p class="h6 mt-4 pb-0 mb-0">Kamu pengelola museum?&ensp;<a class="btn btn-warning btn-sm" href="register-admin.php" value="1" name="auth">Daftar disini!</a></p>
+            </form>
+            <?php include 'auth.php' ?>
         </div>
     </header>
 

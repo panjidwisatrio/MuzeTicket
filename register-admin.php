@@ -24,11 +24,11 @@
 
 <?php
 //kode php disini
-require 'auth-action-admin.php';
+require 'auth.php';
 
 if (isset($_POST["submit"])) {
 
-    if (register($_POST) > 0) {
+    if (register_admin($_POST) > 0) {
         echo "<script>
 		alert('Data berhasil disimpan');
 		document.location.href = 'login-admin.php';
