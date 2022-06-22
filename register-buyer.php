@@ -28,12 +28,12 @@ require 'connect.php';
 if (isset($_POST["submit"])) {
 
     if (register_buyer($_POST) > 0) {
-        // $email = htmlspecialchars(stripslashes($_POST["email"]));
-        // $result = mysqli_query($conn, "SELECT verified_at FROM user WHERE email = '$email'");
+        $email = htmlspecialchars(stripslashes($_POST["email"]));
+        $result = mysqli_query($conn, "SELECT verified_at FROM user WHERE email = '$email'");
 
-        // if($result == null) {
-        //     include 'verify.php';
-        // }
+        if($result == null) {
+            include 'verify.php';
+        }
 
         echo "<script>
 		alert('Data berhasil disimpan');

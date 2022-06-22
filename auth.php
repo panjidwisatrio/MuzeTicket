@@ -43,10 +43,10 @@ function register_buyer($infologin)
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
-    // $message = "Your code is" . $verification_code;
-    // $subject = "Email Verification";
+    $message = "Your code is" . $verification_code;
+    $subject = "Email Verification";
 
-    // send_mail($email, $subject, $message);
+    send_mail($email, $subject, $message);
 
     mysqli_query($conn, "INSERT INTO user(role_id, email, password, verification_code) VALUES(2, '$email', '$password', '$verification_code')");
     
@@ -74,7 +74,7 @@ function register_admin($infologin)
     $check = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
 
     if (empty($username)) {
-        echo "<script>alert('Nama di perlukan!');</script>";
+        return false;
     } else if (mysqli_num_rows($check) > 0) {
         echo "<script>alert('Username sudah ada!');</script>";
         return false;
@@ -87,7 +87,6 @@ function register_admin($infologin)
     }
 
     if (empty($email)) {
-        echo "<script>alert('Email is Required!');</script>";
         return false;
     } else {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
