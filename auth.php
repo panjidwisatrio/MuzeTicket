@@ -1,6 +1,7 @@
 <?php
 
 require 'connect.php';
+require 'mail.php';
 
 function register_buyer($infologin)
 {
@@ -11,15 +12,14 @@ function register_buyer($infologin)
     $email =  htmlspecialchars(stripslashes($infologin["email"]));
     $check_password =  mysqli_real_escape_string($conn, $infologin["check_password"]);
 
-    $check = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
+    $check = mysqli_query($conn, "SELECT nama_lengkap FROM buyer WHERE nama_lengkap = '$username'");
 
     if (empty($username)) {
-        echo "<script>alert('Nama di perlukan!');</script>";
+        return false;
     } else if (mysqli_num_rows($check) > 0) {
         echo "<script>alert('Username sudah ada!');</script>";
         return false;
     } else {
-        // check if name only contains letters and whitespace
         if (!preg_match("/^[a-zA-Z-' ]*$/", $username)) {
             echo "<script>alert('Hanya huruf dan spasi yang diperbolehkan!');</script>";
             return false;
@@ -27,7 +27,6 @@ function register_buyer($infologin)
     }
 
     if (empty($email)) {
-        echo "<script>alert('Email is Required!');</script>";
         return false;
     } else {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -43,14 +42,20 @@ function register_buyer($infologin)
 
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_query($conn, "INSERT INTO user(role_id, email, password) VALUES(2, '$email', '$password')");
+    $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+    // $message = "Your code is" . $verification_code;
+    // $subject = "Email Verification";
 
+    // send_mail($email, $subject, $message);
+
+    mysqli_query($conn, "INSERT INTO user(role_id, email, password, verification_code) VALUES(2, '$email', '$password', '$verification_code')");
+    
     $user_id = mysqli_query($conn, "SELECT user_id FROM user WHERE email = '$email'");
 
-    if(mysqli_num_rows($user_id) == 1) {
+    if (mysqli_num_rows($user_id) == 1) {
         $result = mysqli_fetch_assoc($user_id);
 
-        mysqli_query($conn, "INSERT INTO buyer(user_id, nama_lengkap) VALUES('$result[user_id]', '$password')");
+        mysqli_query($conn, "INSERT INTO buyer(user_id, nama_lengkap) VALUES('$result[user_id]', '$username')");
     }
 
 
@@ -98,14 +103,16 @@ function register_admin($infologin)
 
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_query($conn, "INSERT INTO user(role_id, email, password) VALUES(1, '$email', '$password')");
+    $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+
+    mysqli_query($conn, "INSERT INTO user(role_id, email, password, verification_code) VALUES(1, '$email', '$password', '$verification_code')");
 
     $user_id = mysqli_query($conn, "SELECT user_id FROM user WHERE email = '$email'");
 
-    if(mysqli_num_rows($user_id) == 1) {
+    if (mysqli_num_rows($user_id) == 1) {
         $result = mysqli_fetch_assoc($user_id);
 
-        mysqli_query($conn, "INSERT INTO admin(user_id, nama_lengkap) VALUES('$result[user_id]', '$password')");
+        mysqli_query($conn, "INSERT INTO admin(user_id, nama_lengkap) VALUES('$result[user_id]', '$username')");
     }
 
 
@@ -125,7 +132,6 @@ function login_check($data_login)
         $result = mysqli_fetch_assoc($check_user);
 
         if (password_verify($password, $result["password"])) {
-
             $_SESSION["email"] = $email;
             $_SESSION["login"] = true;
         }

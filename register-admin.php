@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +10,8 @@
     <meta name="author" content="">
 
     <title>MuzeTicket</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,9 +31,9 @@ if (isset($_POST["submit"])) {
 
     if (register_admin($_POST) > 0) {
         echo "<script>
-		alert('Data berhasil disimpan');
-		document.location.href = 'login-admin.php';
-		</script>";
+        alert('Data berhasil disimpan');
+        document.location.href = 'login-admin.php';
+        </script>";
     } else {
         echo mysqli_error($conn);
     }
@@ -69,9 +70,11 @@ if (isset($_POST["submit"])) {
                                         <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" name="check_password" placeholder="Confirm Password">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-warning btn-user btn-block" name="submit">
+                                <button type="submit" class="btn btn-warning btn-user btn-block" name="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     Daftarkan Akun
                                 </button>
+
+                                <?php include 'verify.php'; ?>
 
                             </form>
                             <hr>

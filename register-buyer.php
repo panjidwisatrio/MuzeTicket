@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,10 +23,18 @@
 <?php
 //kode php disini
 require 'auth.php';
+require 'connect.php';
 
 if (isset($_POST["submit"])) {
 
     if (register_buyer($_POST) > 0) {
+        // $email = htmlspecialchars(stripslashes($_POST["email"]));
+        // $result = mysqli_query($conn, "SELECT verified_at FROM user WHERE email = '$email'");
+
+        // if($result == null) {
+        //     include 'verify.php';
+        // }
+
         echo "<script>
 		alert('Data berhasil disimpan');
 		document.location.href = 'login-buyer.php';
@@ -56,23 +62,22 @@ if (isset($_POST["submit"])) {
                             </div>
                             <form class="user" method="POST">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleUsername" name="username" placeholder="Nama Lengkap">
+                                    <input type="text" class="form-control form-control-user" id="exampleUsername" name="username" placeholder="Nama Lengkap" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" placeholder="Email">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" placeholder="Email" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="password" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="password" placeholder="Password" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" name="check_password" placeholder="Confirm Password">
+                                        <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" name="check_password" placeholder="Confirm Password" required>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block" name="submit">
+                                <button type="submit" class="btn btn-primary btn-user btn-block" name="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     Daftarkan Akun
                                 </button>
-
                             </form>
                             <hr>
                             <div class="text-center">
