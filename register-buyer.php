@@ -23,22 +23,11 @@
 <?php
 //kode php disini
 require 'auth.php';
-require 'connect.php';
 
 if (isset($_POST["submit"])) {
 
     if (register_buyer($_POST) > 0) {
-        $email = htmlspecialchars(stripslashes($_POST["email"]));
-        $result = mysqli_query($conn, "SELECT verified_at FROM user WHERE email = '$email'");
-
-        if($result == null) {
-            include 'verify.php';
-        }
-
-        echo "<script>
-		alert('Data berhasil disimpan');
-		document.location.href = 'login-buyer.php';
-		</script>";
+        echo "<script type='text/javascript'>document.location.href = 'verification-buyer.php';</script>";
     } else {
         echo mysqli_error($conn);
     }
@@ -75,7 +64,7 @@ if (isset($_POST["submit"])) {
                                         <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" name="check_password" placeholder="Confirm Password" required>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block" name="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button type="submit" class="btn btn-primary btn-user btn-block" name="submit">
                                     Daftarkan Akun
                                 </button>
                             </form>
@@ -91,15 +80,12 @@ if (isset($_POST["submit"])) {
 
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

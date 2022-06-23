@@ -43,13 +43,13 @@ function register_buyer($infologin)
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
-    $message = "Your code is" . $verification_code;
+    $message = "Your code is " . $verification_code;
     $subject = "Email Verification";
 
     send_mail($email, $subject, $message);
 
     mysqli_query($conn, "INSERT INTO user(role_id, email, password, verification_code) VALUES(2, '$email', '$password', '$verification_code')");
-    
+
     $user_id = mysqli_query($conn, "SELECT user_id FROM user WHERE email = '$email'");
 
     if (mysqli_num_rows($user_id) == 1) {
@@ -60,6 +60,29 @@ function register_buyer($infologin)
 
 
     return mysqli_affected_rows($conn);
+}
+
+function verification_Email($verification)
+{
+    global $conn;
+
+    $code = htmlspecialchars($verification["verification-code"]);
+    $get_email = mysqli_query($conn, "SELECT email FROM user WHERE verification_code = '$code'");
+    $result = false;
+
+    if (mysqli_num_rows($get_email) == 1) {
+        $email = mysqli_fetch_assoc($get_email);
+        $get_code = mysqli_query($conn, "SELECT verification_code FROM user WHERE email = '$email[email]'");
+
+        $check = mysqli_fetch_assoc($get_code);
+
+        if ($code == "$check[verification_code]") {
+            mysqli_query($conn, "UPDATE user SET verified_at = NOW() WHERE email = '$email[email]' AND verification_code = '$code'");
+            $result = true;
+        }
+    }
+
+    return $result;
 }
 
 function register_admin($infologin)
@@ -103,6 +126,10 @@ function register_admin($infologin)
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+    $message = "Your code is " . $verification_code;
+    $subject = "Email Verification";
+
+    send_mail($email, $subject, $message);
 
     mysqli_query($conn, "INSERT INTO user(role_id, email, password, verification_code) VALUES(1, '$email', '$password', '$verification_code')");
 
@@ -130,25 +157,49 @@ function login_check($data_login)
     if (mysqli_num_rows($check_user) == 1) {
         $result = mysqli_fetch_assoc($check_user);
 
-        if (password_verify($password, $result["password"])) {
-            $_SESSION["email"] = $email;
-            $_SESSION["login"] = true;
-        }
-
-        if (isset($data_login["rememberme"])) {
-            setcookie("login", "tetap ingat", time() + 30);
-        } else {
-            echo "Cookie belum dibuat";
-        }
-
         if ($result['role_id'] == 1) {
-            echo "<script>
+            if ($result['verified_at'] != null) {
+                if (password_verify($password, $result["password"])) {
+                    $_SESSION["email"] = $email;
+                    $_SESSION["login"] = true;
+                }
+
+                if (isset($data_login["rememberme"])) {
+                    setcookie("login", "tetap ingat", time() + 30);
+                } else {
+                    echo "Cookie belum dibuat";
+                }
+
+                echo "<script>
                 document.location.href = 'dashboard_admin.php'
                 </script>";
+            } else {
+                echo "<script>
+                alert('Your account not verified yet')
+                document.location.href = 'verification-admin.php'
+                </script>";
+            }
         } else if ($result['role_id'] == 2) {
-            echo "<script>
+            if ($result['verified_at'] != null) {
+                if (password_verify($password, $result["password"])) {
+                    $_SESSION["email"] = $email;
+                    $_SESSION["login"] = true;
+                }
+
+                if (isset($data_login["rememberme"])) {
+                    setcookie("login", "tetap ingat", time() + 30);
+                } else {
+                    echo "Cookie belum dibuat";
+                }
+                echo "<script>
                 document.location.href = 'dashboard_buyer.php'
                 </script>";
+            } else {
+                echo "<script>
+                alert('Your account not verified yet')
+                document.location.href = 'verification-buyer.php'
+                </script>";
+            }
         }
     } else {
         echo "<script type='text/javascript'>alert('Email / Password Salah!'); document.location.href='login-admin.php'</script>";

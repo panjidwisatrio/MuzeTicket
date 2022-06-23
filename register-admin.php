@@ -30,10 +30,7 @@ require 'auth.php';
 if (isset($_POST["submit"])) {
 
     if (register_admin($_POST) > 0) {
-        echo "<script>
-        alert('Data berhasil disimpan');
-        document.location.href = 'login-admin.php';
-        </script>";
+        echo "<script type='text/javascript'>document.location.href = 'verification-admin.php';</script>";
     } else {
         echo mysqli_error($conn);
     }
@@ -73,9 +70,6 @@ if (isset($_POST["submit"])) {
                                 <button type="submit" class="btn btn-warning btn-user btn-block" name="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     Daftarkan Akun
                                 </button>
-
-                                <?php include 'verify.php'; ?>
-
                             </form>
                             <hr>
                             <div class="text-center">
@@ -88,13 +82,6 @@ if (isset($_POST["submit"])) {
         </div>
 
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
