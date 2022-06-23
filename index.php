@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="css/style.css">
 
+    <link rel="icon" type="image/x-icon" href="asset/Logo.svg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
@@ -57,7 +59,7 @@
         <div class="container px-5 my-5">
             <div class="row gx-5 ">
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h2 class="fw-bolder mb-0">A better way to start building.</h2>
+                    <h2 class="fw-bolder mb-0">Start a new good way.</h2>
                 </div>
                 <div class="col-lg-8">
                     <div class="row gx-5 row-cols-1 row-cols-md-2">

@@ -2,13 +2,13 @@
 session_start();
 //kode php disini
 
-if (isset($_COOKIE["login"])) {
-    if ($_COOKIE["login"] == "true") {
-        $_SESSION["login"] = true;
+if (isset($_COOKIE["login-admin"])) {
+    if ($_COOKIE["login-admin"] == "true") {
+        $_SESSION["login-admin"] = true;
     }
 }
 
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["login-admin"])) {
     echo "<script>
 	alert('Ilegal akses!');
 	document.location.href = 'index.php';
@@ -30,6 +30,9 @@ if (!isset($_SESSION["login"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <link rel="icon" typr="image/x-icon" href="asset/Logo.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,22 +47,27 @@ if (!isset($_SESSION["login"])) {
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="#!">
                 <img src="asset/Logo.svg" alt="">MuzeTicket</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="dashboard_admin.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page"
+                            href="dashboard_admin.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="ticket-admin.php">MyTicket</a></li>
                 </ul>
                 <!-- Nav Item - User Information -->
                 <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Profile</a></li>
+                            <li><a class="dropdown-item" href="profile-admin.php">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="logout.php" role="button" onclick="return confirm('yakin akan logout?')">Logout</a></li>
+                            <li><a class="dropdown-item" href="logout.php" role="button"
+                                    onclick="return confirm('yakin akan logout?')">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -74,9 +82,11 @@ if (!isset($_SESSION["login"])) {
                     <?php
                     require 'connect.php';
                     $result = mysqli_query($conn, "SELECT admin.nama_lengkap FROM admin INNER JOIN user ON user.user_id = admin.user_id");
-                    $row = mysqli_fetch_row($result);
-                    $username = $row[0];
-                    echo $username;
+
+                    if (mysqli_num_rows($result) == 1) {
+                        $username = mysqli_fetch_assoc($result);
+                        echo $username['nama_lengkap'];
+                    }
                     ?>
                 </h1>
                 <p class="lead fw-normal text-white-50 mb-0">Tetap Semangat Yaa!</p>
@@ -102,6 +112,7 @@ if (!isset($_SESSION["login"])) {
                                     <th>NIK</th>
                                     <th>TANGGAL KUNJUNGAN</th>
                                     <th>ROMBONGAN</th>
+                                    <th>SCAN QR CODE</th>
                                 </tr>
                             </thead>
                             <?php
@@ -127,6 +138,9 @@ if (!isset($_SESSION["login"])) {
                                     echo "<td>{$NIK}</td>";
                                     echo "<td>{$tanggal_kunjungan}</td>";
                                     echo "<td>{$jumlah_rombongan} orang</td>";
+                                    echo "<td> 
+                                    <i class='bi bi-qr-code-scan'></i> 
+                                    </td>";
                                     echo "</tr>";
                                     echo "</tbody>";
                                 }

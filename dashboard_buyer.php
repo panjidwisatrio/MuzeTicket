@@ -2,13 +2,13 @@
 session_start();
 //kode php disini
 
-if (isset($_COOKIE["login"])) {
-    if ($_COOKIE["login"] == "true") {
-        $_SESSION["login"] = true;
+if (isset($_COOKIE["login-buyer"])) {
+    if ($_COOKIE["login-buyer"] == "true") {
+        $_SESSION["login-buyer"] = true;
     }
 }
 
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["login-buyer"])) {
     echo "<script>
 	alert('Ilegal akses!');
 	document.location.href = 'index.php';
@@ -18,81 +18,171 @@ if (!isset($_SESSION["login"])) {
 }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="css/styles_buyer.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>MuzeTicket</title>
+    <link rel="icon" type="image/x-icon" href="asset/Logo.svg">
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
-    <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
-        <div class="border-end bg-white p-3" id="sidebar-wrapper">
-
-            <div class=" bg-light text-center h4 mb-0">
-                <img src="asset/Logo.svg" alt="">MuzeTicket
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="index.html">MuzeTicket</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
+                        class="fas fa-search"></i></button>
             </div>
-            <div class="list-group list-group-flush mt-5">
-                <a class="list-group-item-action list-group-item-light p-3 text-center text-decoration-none h6" href="#!"><i class="bi bi-house-door"></i>&ensp;Dashboard</a>
-                <a class="list-group-item-action list-group-item-light p-3 text-center text-decoration-none h6" href="#!"><i class="bi bi-clock-history"></i>&ensp;Riwayat</a>
-                <a class="list-group-item-action list-group-item-light p-3 text-center text-decoration-none h6" href="#!"><i class="bi bi-person"></i>&ensp;Profile</a>
-            </div>
-        </div>
-        <!-- End of Sidebar -->
-        <!-- Page content wrapper-->
-        <div id="page-content-wrapper">
-            <!-- Top navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <button class="btn rounded-circle" id="sidebarToggle"><i class="bi bi-arrow-bar-right"></i></button>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse me-5" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#!">Profile</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="logout.php" role="button" onclick="return confirm('yakin akan logout?')">Logout</a>
-                                </div>
-                            </li>
-                        </ul>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="logout.php" role="button"
+                            onclick="return confirm('yakin akan logout?')">Logout</a>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Dashboard</div>
+                        <a class="nav-link" href="index.html">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
+                            Home
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Ticket</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-ticket"></i></div>
+                            MyTicket
+                        </a>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                            aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                            Riwayat
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Other</div>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-address-card"></i></div>
+                            Contact Us
+                        </a>
+                        <a class="nav-link" href="logout.php" role="button" onclick="return confirm('yakin akan logout?')">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+                            Log Out
+                        </a>
                     </div>
                 </div>
             </nav>
-            <!-- Page content-->
-            <div class="container-fluid">
-                <h1 class="mt-4">Simple Sidebar</h1>
-                <p>The starting state of the menu will appear collapsed on smaller screens, and will appear
-                    non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-                <p>
-                    Make sure to keep all page content within the
-                    <code>#page-content-wrapper</code>
-                    . The top navbar is optional, and just for demonstration. Just create an element with the
-                    <code>#sidebarToggle</code>
-                    ID which will toggle the menu when clicked.
-                </p>
-            </div>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Daftar Museum</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Pilih museum yang kamu ingin kunjungi dan pesan tiketnya!
+                        </li>
+                    </ol>
+                    <div class="row mb-5">
+                        <div class="col-md-5 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                                </div>
+                                <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
+                                <div class="card-body">
+                                    <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
+                                    <a href="javascript:void(0);" class="card-link">Card link</a>
+                                    <a href="javascript:void(0);" class="card-link">Another link</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                                </div>
+                                <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
+                                <div class="card-body">
+                                    <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
+                                    <a href="javascript:void(0);" class="card-link">Card link</a>
+                                    <a href="javascript:void(0);" class="card-link">Another link</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                                </div>
+                                <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
+                                <div class="card-body">
+                                    <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
+                                    <a href="javascript:void(0);" class="card-link">Card link</a>
+                                    <a href="javascript:void(0);" class="card-link">Another link</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                                </div>
+                                <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
+                                <div class="card-body">
+                                    <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
+                                    <a href="javascript:void(0);" class="card-link">Card link</a>
+                                    <a href="javascript:void(0);" class="card-link">Another link</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </body>
 

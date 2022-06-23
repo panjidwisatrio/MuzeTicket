@@ -161,10 +161,10 @@ function login_check($data_login)
             if ($result['verified_at'] != null) {
                 if (password_verify($password, $result["password"])) {
                     $_SESSION["email"] = $email;
-                    $_SESSION["login"] = true;
+                    $_SESSION["login-admin"] = true;
                 }
 
-                if (isset($data_login["rememberme"])) {
+                if (isset($data_login["rememberme-admin"])) {
                     setcookie("login", "tetap ingat", time() + 30);
                 } else {
                     echo "Cookie belum dibuat";
@@ -183,14 +183,15 @@ function login_check($data_login)
             if ($result['verified_at'] != null) {
                 if (password_verify($password, $result["password"])) {
                     $_SESSION["email"] = $email;
-                    $_SESSION["login"] = true;
+                    $_SESSION["login-buyer"] = true;
                 }
 
-                if (isset($data_login["rememberme"])) {
+                if (isset($data_login["rememberme-buyer"])) {
                     setcookie("login", "tetap ingat", time() + 30);
                 } else {
                     echo "Cookie belum dibuat";
                 }
+                
                 echo "<script>
                 document.location.href = 'dashboard_buyer.php'
                 </script>";

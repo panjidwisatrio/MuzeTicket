@@ -41,6 +41,8 @@ if (isset($_POST["login"])) {
     <link href="css/style_login.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <link rel="icon" type="image/x-icon" href="asset/Logo.svg">
+
 </head>
 
 <body class="bg-gradient-warning">
@@ -71,7 +73,7 @@ if (isset($_POST["login"])) {
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" name="rememberme" id="customCheck">
+                                                <input type="checkbox" class="custom-control-input" name="rememberme-admin" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>

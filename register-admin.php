@@ -21,6 +21,8 @@
     <link href="css/style_login.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <link rel="icon" type="image/x-icon" href="asset/Logo.svg">
+
 </head>
 
 <?php

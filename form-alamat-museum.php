@@ -53,33 +53,31 @@ if (isset($_POST["submit"])) {
 
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4">Silahkan Isi Data Museum!</h1>
+                        <h1 class="h4 text-gray-900 mb-4">Silahkan Isi Alamat Museum!</h1>
                     </div>
                     <form class="user" method="POST">
                         <div class="form-group">
-                            <label for="text" class="form-label">Nama Museum</label>
+                            <label for="text" class="form-label">Jalan</label>
                             <input type="text" class="form-control form-control-user" id="exampleUsername"
-                                name="username" placeholder="Museum Wayang">
+                                name="username" placeholder="Jl. Telekomunikasi No. 1, Terusan Buahbatu">
                         </div>
                         <div class="form-group">
-                            <label for="date" class="form-label">Tanggal Buka</label>
-                            <input type="date" class="form-control form-control-user" id="date">
+                            <label for="text" class="form-label">Kota</label>
+                            <input type="text" class="form-control form-control-user" id="exampleUsername"
+                                name="username" placeholder="Kabupaten Bandung">
                         </div>
                         <div class="form-group">
-                            <label for="date" class="form-label">Tanggal Tutup</label>
-                            <input type="date" class="form-control form-control-user" id="date">
+                            <label for="text" class="form-label">Provinsi</label>
+                            <input type="text" class="form-control form-control-user" id="exampleUsername"
+                                name="username" placeholder="Jawa Barat">
                         </div>
                         <div class="form-group">
-                            <label for="Street">Foto Museum</label>
-                            <input type="file" class="form-control" id="Street">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                            <textarea class="form-control form-control-user" id="exampleFormControlTextarea1"
-                                rows="3"></textarea>
+                            <label for="text" class="form-label">Kode Pos</label>
+                            <input type="number" class="form-control form-control-user" id="exampleUsername"
+                                name="username" placeholder="40257">
                         </div>
                         <button type="submit" class="btn btn-warning btn-user btn-block" name="submit">
-                            Selanjutnya
+                            Daftarkan Museum
                         </button>
 
                     </form>
@@ -91,7 +89,6 @@ if (isset($_POST["submit"])) {
             </div>
         </div>
     </div>
-
 
 
     <!-- Bootstrap core JavaScript-->

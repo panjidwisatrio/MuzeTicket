@@ -9,6 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="icon" type="image/x-icon" href="asset/Logo.svg">
+
     <title>MuzeTicket</title>
 
     <!-- Custom fonts for this template-->
