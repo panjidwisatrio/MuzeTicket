@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -22,7 +23,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">
+            <a class="navbar-brand" href="dashboard_admin.php">
                 <img src="asset/Logo.svg" alt="">MuzeTicket</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -39,7 +40,7 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Profile</a></li>
+                            <li><a class="dropdown-item" href="profile-admin.php">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
@@ -64,12 +65,44 @@
                         <h5 class="text-center fw-bold">Daftar Tiket</h5>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 mb-2">
+                        <div class="col-sm mb-2">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="https://picsum.photos/200/300?blur" alt="Card image cap">
+                                <img class="card-img-top" src="https://picsum.photos/200?blur=1" alt="Card image cap">
                                 <div class="card-body ">
                                     <h5 class="card-title fw-bold text-center">Senin</h5>
-                                    <p class="card-text text-center">Rp.10.000 per Tgl 20/06/2022</p>
+                                    <p class="card-text text-center">Rp.10.000</p>
+                                    <p class="card-text text-center">Kuota 10 Tiket</p>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Edit Tiket
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm mb-2">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="https://picsum.photos/200?blur=2" alt="Card image cap">
+                                <div class="card-body ">
+                                    <h5 class="card-title fw-bold text-center">Selasa</h5>
+                                    <p class="card-text text-center">Rp.10.000 </p>
+                                    <p class="card-text text-center">Kuota 10 Tiket</p>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Edit Tiket
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm mb-2">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="https://picsum.photos/200?blur=3" alt="Card image cap">
+                                <div class="card-body ">
+                                    <h5 class="card-title fw-bold text-center">Rabu</h5>
+                                    <p class="card-text text-center">Rp.10.000 </p>
                                     <p class="card-text text-center">Kuota 10 Tiket</p>
                                     <div class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-primary " data-bs-toggle="modal"
@@ -81,7 +114,59 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm mb-2">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="https://picsum.photos/200?blur=4" alt="Card image cap">
+                                <div class="card-body ">
+                                    <h5 class="card-title fw-bold text-center">Kamis</h5>
+                                    <p class="card-text text-center">Rp.10.000 </p>
+                                    <p class="card-text text-center">Kuota 10 Tiket</p>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Edit Tiket
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm mb-2">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="https://picsum.photos/200?blur=5" alt="Card image cap">
+                                <div class="card-body ">
+                                    <h5 class="card-title fw-bold text-center">Jumat</h5>
+                                    <p class="card-text text-center">Rp.10.000 </p>
+                                    <p class="card-text text-center">Kuota 10 Tiket</p>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Edit Tiket
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm mb-2">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="https://picsum.photos/200?blur=6" alt="Card image cap">
+                                <div class="card-body ">
+                                    <h5 class="card-title fw-bold text-center">Sabtu</h5>
+                                    <p class="card-text text-center">Rp.10.000 </p>
+                                    <p class="card-text text-center">Kuota 10 Tiket</p>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Edit Tiket
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
 
             </div>
             <div class="col">
@@ -103,24 +188,25 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="ticketprice" class="form-label">Harga</label>
-                            <input type="number" class="form-control" id="ticketprice" s>
-                        </div>
-                        <div class="mb-3">
-                            <label for="date" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" id="date" placeholder="HH/BB/TT">
-                        </div>
-                        <div class="mb-3">
-                            <label for="opentime" class="form-label">Waktu Buka</label>
-                            <input type="time" class="form-control" id="opentime">
-                        </div>
-                        <div class="mb-3">
-                            <label for="closingtime" class="form-label">Waktu Tutup</label>
-                            <input type="time" class="form-control" id="closingtime">
+                            <label for="ticketprice" class="form-label">Hari</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Pilih Hari</option>
+                                <option value="1">Minggu</option>
+                                <option value="2">Senin</option>
+                                <option value="3">Selasa</option>
+                                <option value="4">Rabu</option>
+                                <option value="5">Kamis</option>
+                                <option value="6">Jumat</option>
+                                <option value="7">Sabtu</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="quotamuseum" class="form-label">Kuota</label>
                             <input type="number" class="form-control" id="quotamuseum" s>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticketprice" class="form-label">Harga</label>
+                            <input type="number" class="form-control" id="ticketprice" s>
                         </div>
                     </form>
                 </div>

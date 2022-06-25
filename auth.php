@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'connect.php';
 require 'mail.php';
 
@@ -94,7 +94,7 @@ function register_admin($infologin)
     $email =  htmlspecialchars(stripslashes($infologin["email"]));
     $check_password =  mysqli_real_escape_string($conn, $infologin["check_password"]);
 
-    $check = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
+    $check = mysqli_query($conn, "SELECT nama_lengkap FROM admin WHERE nama_lengkap = '$username'");
 
     if (empty($username)) {
         return false;
@@ -118,30 +118,30 @@ function register_admin($infologin)
         }
     }
 
+    
     if ($password !== $check_password) {
         echo "<script>alert('Password tidak sama!');</script>";
         return false;
     }
-
+    
     $password = password_hash($password, PASSWORD_DEFAULT);
-
+    
     $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
     $message = "Your code is " . $verification_code;
     $subject = "Email Verification";
-
+    
     send_mail($email, $subject, $message);
-
+    
     mysqli_query($conn, "INSERT INTO user(role_id, email, password, verification_code) VALUES(1, '$email', '$password', '$verification_code')");
-
     $user_id = mysqli_query($conn, "SELECT user_id FROM user WHERE email = '$email'");
-
+    
     if (mysqli_num_rows($user_id) == 1) {
         $result = mysqli_fetch_assoc($user_id);
-
+        
         mysqli_query($conn, "INSERT INTO admin(user_id, nama_lengkap) VALUES('$result[user_id]', '$username')");
     }
-
-
+    
+    $_SESSION["admin"] = $infologin["email"];
     return mysqli_affected_rows($conn);
 }
 

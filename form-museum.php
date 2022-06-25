@@ -13,9 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/style_login.css" rel="stylesheet">
@@ -27,17 +25,40 @@
 
 <?php
 //kode php disini
-require 'auth.php';
+session_start();
+require 'connect.php';
 
 if (isset($_POST["submit"])) {
 
-    if (register_admin($_POST) > 0) {
-        echo "<script>
-		alert('Data berhasil disimpan');
-		document.location.href = 'login-admin.php';
-		</script>";
+    $museum_name = htmlspecialchars($_POST["museum_name"]);
+    $date_open = htmlspecialchars($_POST["date_open"]);
+    $date_close = htmlspecialchars($_POST["date_close"]);
+    $deskripsi_museum = htmlspecialchars($_POST["deskripsi_museum"]);
+
+    if (isset($_SESSION["admin"])) {
+        $session = $_SESSION["admin"];
+        $result = mysqli_query($conn, "SELECT user_id FROM user WHERE email = '$session'");
+
+        if (mysqli_num_rows($result) == 1) {
+            $id_user = mysqli_fetch_assoc($result);
+            $id = mysqli_query($conn, "SELECT admin_id FROM admin WHERE user_id = '$id_user[user_id]'");
+            $id_admin = mysqli_fetch_assoc($id);
+
+            mysqli_query($conn, "INSERT INTO `museum`(`museum_id`, `admin_id`, `nama_museum`, `deskripsi`, `tanggal_buka`, `tanggal_tutup`)
+                                            VALUES ('',$id_admin[admin_id],'$museum_name','$deskripsi_museum','$date_open','$date_close')");
+            echo "<script>
+                alert('data museum berhasil dimasukan');
+	            document.location.href='form-alamat-museum.php';
+	        </script>";
+        } else {
+            echo "<script>
+                alert('data museum gagal dimasukan');
+	        </script>";
+        }
     } else {
-        echo mysqli_error($conn);
+        echo "<script>
+            alert('data museum gagal dimasukan');
+	    </script>";
     }
 }
 
@@ -58,25 +79,19 @@ if (isset($_POST["submit"])) {
                     <form class="user" method="POST">
                         <div class="form-group">
                             <label for="text" class="form-label">Nama Museum</label>
-                            <input type="text" class="form-control form-control-user" id="exampleUsername"
-                                name="username" placeholder="Museum Wayang">
+                            <input type="text" class="form-control form-control-user" id="exampleUsername" name="museum_name" placeholder="Museum Wayang">
                         </div>
                         <div class="form-group">
                             <label for="date" class="form-label">Tanggal Buka</label>
-                            <input type="date" class="form-control form-control-user" id="date">
+                            <input type="date" class="form-control form-control-user" id="date" name="date_open">
                         </div>
                         <div class="form-group">
                             <label for="date" class="form-label">Tanggal Tutup</label>
-                            <input type="date" class="form-control form-control-user" id="date">
-                        </div>
-                        <div class="form-group">
-                            <label for="Street">Foto Museum</label>
-                            <input type="file" class="form-control" id="Street">
+                            <input type="date" class="form-control form-control-user" id="date" name="date_close">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                            <textarea class="form-control form-control-user" id="exampleFormControlTextarea1"
-                                rows="3"></textarea>
+                            <textarea class="form-control form-control-user" id="exampleFormControlTextarea1" rows="3" name="deskripsi_museum"></textarea>
                         </div>
                         <button type="submit" class="btn btn-warning btn-user btn-block" name="submit">
                             Selanjutnya
@@ -84,9 +99,6 @@ if (isset($_POST["submit"])) {
 
                     </form>
                     <hr>
-                    <div class="text-center">
-                        <a class="small" href="login-admin.php">Sudah punya akun? Login!</a>
-                    </div>
                 </div>
             </div>
         </div>

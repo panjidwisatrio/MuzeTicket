@@ -29,7 +29,7 @@ if(isset($_POST["submit"])) {
     if(verification_Email($_POST) == true) {
         echo "<script>
         alert('Verification Successfully');
-        document.location.href='login-admin.php';
+        document.location.href='form-museum.php';
         </script>";
     } else {
         echo "<script>

@@ -81,7 +81,11 @@ if (!isset($_SESSION["login-admin"])) {
                 <h1 class="display-4 fw-bolder">Hallo,
                     <?php
                     require 'connect.php';
-                    $result = mysqli_query($conn, "SELECT admin.nama_lengkap FROM admin INNER JOIN user ON user.user_id = admin.user_id");
+
+                    $email = $_SESSION['email'];
+                    $result = mysqli_query($conn, "SELECT admin.nama_lengkap, user.email FROM admin INNER 
+                    JOIN user ON user.user_id = admin.user_id
+                    WHERE user.email = '$email'");
 
                     if (mysqli_num_rows($result) == 1) {
                         $username = mysqli_fetch_assoc($result);

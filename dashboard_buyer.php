@@ -38,29 +38,24 @@ if (!isset($_SESSION["login-buyer"])) {
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="index.html">MuzeTicket</a>
         <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
-                class="fas fa-bars"></i></button>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
-                    aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
-                        class="fas fa-search"></i></button>
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
             </div>
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#!">Profile</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="logout.php" role="button"
-                            onclick="return confirm('yakin akan logout?')">Logout</a>
+                    <li><a class="dropdown-item" href="logout.php" role="button" onclick="return confirm('yakin akan logout?')">Logout</a>
                 </ul>
             </li>
         </ul>
@@ -71,18 +66,16 @@ if (!isset($_SESSION["login-buyer"])) {
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Dashboard</div>
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="dashboard_buyer.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
                             Home
                         </a>
                         <div class="sb-sidenav-menu-heading">Ticket</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-ticket"></i></div>
                             MyTicket
                         </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                            aria-expanded="false" aria-controls="collapsePages">
+                        <a class="nav-link" href="riwayat-pembelian.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
                             Riwayat
                         </a>
@@ -108,62 +101,37 @@ if (!isset($_SESSION["login-buyer"])) {
                         </li>
                     </ol>
                     <div class="row mb-5">
-                        <div class="col-md-5 col-lg-4 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                        <?php
+                        require 'connect.php';
+
+                        $result = mysqli_query($conn, "SELECT museum.nama_museum, address.street, museum.deskripsi FROM museum INNER JOIN address ON address.museum_id = museum.museum_id");
+
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $nama_museum = $row["nama_museum"];
+                                $street = $row["street"];
+                                $deskripsi = $row["deskripsi"];
+                        ?>
+
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?php echo $nama_museum?></h5>
+                                            <h6 class="card-subtitle text-muted"><?php echo $street?></h6>
+                                        </div>
+                                        <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
+                                        <div class="card-body">
+                                            <p class="card-text"><?php echo $deskripsi?></p>
+                                            <a href="" class="card-link">Detail Museum</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
-                                <div class="card-body">
-                                    <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
-                                    <a href="javascript:void(0);" class="card-link">Card link</a>
-                                    <a href="javascript:void(0);" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                                </div>
-                                <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
-                                <div class="card-body">
-                                    <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
-                                    <a href="javascript:void(0);" class="card-link">Card link</a>
-                                    <a href="javascript:void(0);" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                                </div>
-                                <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
-                                <div class="card-body">
-                                    <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
-                                    <a href="javascript:void(0);" class="card-link">Card link</a>
-                                    <a href="javascript:void(0);" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                                </div>
-                                <img class="img-fluid" src="asset/13.jpg" alt="Card image cap" />
-                                <div class="card-body">
-                                    <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
-                                    <a href="javascript:void(0);" class="card-link">Card link</a>
-                                    <a href="javascript:void(0);" class="card-link">Another link</a>
-                                </div>
-                            </div>
-                        </div>
+
+                        <?php
+                            }
+                        }
+
+                        ?>
                     </div>
                 </div>
             </main>
@@ -181,8 +149,7 @@ if (!isset($_SESSION["login-buyer"])) {
             </footer>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </body>
 

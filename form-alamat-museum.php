@@ -13,9 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/style_login.css" rel="stylesheet">
@@ -31,13 +29,48 @@ require 'auth.php';
 
 if (isset($_POST["submit"])) {
 
-    if (register_admin($_POST) > 0) {
-        echo "<script>
-		alert('Data berhasil disimpan');
-		document.location.href = 'login-admin.php';
-		</script>";
+    $jalan = htmlspecialchars($_POST["jalan"]);
+    $kota = htmlspecialchars($_POST["kota"]);
+    $province = htmlspecialchars($_POST["provinsi"]);
+    $postal = htmlspecialchars($_POST["postal"]);
+
+    if (isset($_SESSION["admin"])) {
+        $session = $_SESSION["admin"];
+        $result = mysqli_query($conn, "SELECT user_id FROM user WHERE email = '$session'");
+        if (mysqli_num_rows($result) == 1) {
+            $id_user = mysqli_fetch_assoc($result);
+            $admin = mysqli_query($conn, "SELECT admin_id FROM admin WHERE user_id = '$id_user[user_id]'");
+            if (mysqli_num_rows($admin) == 1) {
+                $id_admin = mysqli_fetch_assoc($admin);
+                $museum = mysqli_query($conn, "SELECT museum_id FROM museum WHERE admin_id = '$id_admin[admin_id]'");
+                if (mysqli_num_rows($museum) == 1) {
+                    $id_museum = mysqli_fetch_assoc($museum);
+                    mysqli_query($conn, "INSERT INTO `address`(`address_id`, `museum_id`, `street`, `city`, `province`, `postal_code`)
+                                    VALUES ('',$id_museum[museum_id],'$jalan','$kota','$province','$postal')");
+
+                    echo "<script>
+                        alert('data museum berhasil dimasukan');
+                        document.location.href='dashboard-admin.php';
+                    </script>";
+                } else {
+                    echo "<script>
+                        alert('data museum gagal dimasukan');
+	                </script>";
+                }
+            } else {
+                echo "<script>
+                    alert('data museum gagal dimasukan');
+	            </script>";
+            }
+        } else {
+            echo "<script>
+                alert('data museum gagal dimasukan');
+	        </script>";
+        }
     } else {
-        echo mysqli_error($conn);
+        echo "<script>
+            alert('data museum gagal dimasukan');
+	    </script>";
     }
 }
 
@@ -58,33 +91,25 @@ if (isset($_POST["submit"])) {
                     <form class="user" method="POST">
                         <div class="form-group">
                             <label for="text" class="form-label">Jalan</label>
-                            <input type="text" class="form-control form-control-user" id="exampleUsername"
-                                name="username" placeholder="Jl. Telekomunikasi No. 1, Terusan Buahbatu">
+                            <input type="text" class="form-control form-control-user" id="exampleUsername" name="jalan" placeholder="Jl. Telekomunikasi No. 1, Terusan Buahbatu">
                         </div>
                         <div class="form-group">
                             <label for="text" class="form-label">Kota</label>
-                            <input type="text" class="form-control form-control-user" id="exampleUsername"
-                                name="username" placeholder="Kabupaten Bandung">
+                            <input type="text" class="form-control form-control-user" id="exampleUsername" name="kota" placeholder="Kabupaten Bandung">
                         </div>
                         <div class="form-group">
                             <label for="text" class="form-label">Provinsi</label>
-                            <input type="text" class="form-control form-control-user" id="exampleUsername"
-                                name="username" placeholder="Jawa Barat">
+                            <input type="text" class="form-control form-control-user" id="exampleUsername" name="provinsi" placeholder="Jawa Barat">
                         </div>
                         <div class="form-group">
                             <label for="text" class="form-label">Kode Pos</label>
-                            <input type="number" class="form-control form-control-user" id="exampleUsername"
-                                name="username" placeholder="40257">
+                            <input type="number" class="form-control form-control-user" id="exampleUsername" name="postal" placeholder="40257">
                         </div>
                         <button type="submit" class="btn btn-warning btn-user btn-block" name="submit">
                             Daftarkan Museum
                         </button>
 
                     </form>
-                    <hr>
-                    <div class="text-center">
-                        <a class="small" href="login-admin.php">Sudah punya akun? Login!</a>
-                    </div>
                 </div>
             </div>
         </div>
