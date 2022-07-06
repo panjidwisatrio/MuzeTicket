@@ -1,6 +1,5 @@
 <?php
 session_start();
-//kode php disini
 
 if (isset($_COOKIE["login-admin"])) {
     if ($_COOKIE["login-admin"] == "true") {

@@ -50,7 +50,7 @@ if (isset($_POST["submit"])) {
 
                     echo "<script>
                         alert('data museum berhasil dimasukan');
-                        document.location.href='dashboard-admin.php';
+                        document.location.href='dashboard_admin.php';
                     </script>";
                 } else {
                     echo "<script>

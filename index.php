@@ -119,31 +119,31 @@
                     <div class="row gx-5 row-cols-1 row-cols-sm-2 row-cols-xl-4 justify-content-center">
                         <div class="col mb-5 mb-5 mb-xl-0">
                             <div class="text-center">
-                                <img class="img-fluid rounded-circle mb-4 px-4" src="https://dummyimage.com/150x150/ced4da/6c757d" alt="..." />
+                                <img class="img-fluid rounded-circle mb-4 px-4" src="asset/img/Panji(Revisi).jpg" alt="..." />
                                 <h5 class="fw-bolder">Panji Dwi Satrio</h5>
                             </div>
                         </div>
                         <div class="col mb-5 mb-5 mb-xl-0">
                             <div class="text-center">
-                                <img class="img-fluid rounded-circle mb-4 px-4" src="https://dummyimage.com/150x150/ced4da/6c757d" alt="..." />
+                                <img class="img-fluid rounded-circle mb-4 px-4" src="asset/img/MR.jpg" alt="..." />
                                 <h5 class="fw-bolder">M. Agung Isra Narwin</h5>
                             </div>
                         </div>
                         <div class="col mb-5 mb-5 mb-xl-0">
                             <div class="text-center">
-                                <img class="img-fluid rounded-circle mb-4 px-4" src="https://dummyimage.com/150x150/ced4da/6c757d" alt="..." />
+                                <img class="img-fluid rounded-circle mb-4 px-4" src="asset/img/IMG_1435_11zon.jpg" alt="..." />
                                 <h5 class="fw-bolder">Nursilman Raja Saputra Azhary</h5>
                             </div>
                         </div>
                         <div class="col mb-5 mb-5 mb-sm-0">
                             <div class="text-center">
-                                <img class="img-fluid rounded-circle mb-4 px-4" src="https://dummyimage.com/150x150/ced4da/6c757d" alt="..." />
+                                <img class="img-fluid rounded-circle mb-4 px-4" src="asset/img/4x6.jpg" alt="..." />
                                 <h5 class="fw-bolder">Raihan Aulia Rahman</h5>
                             </div>
                         </div>
                         <div class="col mb-5">
                             <div class="text-center">
-                                <img class="img-fluid rounded-circle mb-4 px-4" src="https://dummyimage.com/150x150/ced4da/6c757d" alt="..." />
+                                <img class="img-fluid rounded-circle mb-4 px-4" src="asset/img/citra.jpg" alt="..." />
                                 <h5 class="fw-bolder">Citra Wanodya</h5>
                             </div>
                         </div>

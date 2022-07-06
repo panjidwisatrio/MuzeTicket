@@ -187,7 +187,7 @@ function login_check($data_login)
                 }
 
                 if (isset($data_login["rememberme-buyer"])) {
-                    setcookie("login", "tetap ingat", time() + 30);
+                    setcookie("login-buyer", "tetap ingat", time() + 30);
                 } else {
                     echo "Cookie belum dibuat";
                 }

@@ -1,7 +1,7 @@
 <?php
 //kode php disini
 
-if (isset($_SESSION["login"])) {
+if (isset($_SESSION["login-buyer"])) {
     echo "<script>
 	document.location.href='dashboard_buyer.php';
 	</script>";
